@@ -1,0 +1,44 @@
+﻿@model IEnumerable<FinalProject.Models.CartItem>
+@{
+    decimal totalPrice = 0;
+}
+<body style="background-color:wheat;">
+    <h1 style="background-color:wheat; padding-top:20px; margin-top:20px; color:navy;"><b>Your Favorites History</b></h1>
+    @if (Model != null && Model.Any())
+    {
+        <table class="table" style="background-color:wheat; padding:20px;">
+            <thead>
+                <tr>
+                    <th style="color:black; border: solid 1px black;">Product ID</th>
+                    <th style="color:black; border: solid 1px black;">Name</th>
+
+                    <th style="color:black; border: solid 1px black;">Price</th>
+
+                    
+                    <th style="color:black; border: solid 1px black;">Actions</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    totalPrice += item.producprice * item.quintity;
+                    <tr>
+                        <td style="color:black; border: solid 1px black;">@item.ProductID</td>
+                        <td style="color:black; border: solid 1px black;">@item.productname</td>
+                        <td style="color:black; border: solid 1px black;">@item.producprice</td>
+                        
+                        <td style="color:black; border: solid 1px black;">
+                            <a asp-action="Removecart" asp-controller="Customer" asp-route-id="@item.Id" class="btn btn-primary">Remove</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h2 style="background-color:wheat; padding:20px;">No products found in your cart history.</h2>
+    }
+
+</body>

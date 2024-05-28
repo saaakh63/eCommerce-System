@@ -1,0 +1,57 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Cart";
+    decimal totalPrice = 0;
+}
+@model IEnumerable<FinalProject.Models.CartItem>
+
+<body style="background-color:wheat; padding-top:20px; margin-top:20px; color:navy;">
+    <h1 style="background-color:wheat; padding-top:20px; margin-top:20px; color:navy;">Cart</h1>
+    @if (Model != null && Model.Any())
+    {
+        <form method="post" asp-action="Checkout" asp-controller="AddToCart">
+            <table class="table" style="background-color:wheat; padding-top:20px; margin-top:20px; color:navy;">
+                <thead>
+                    <tr>
+                        <th style="color:black; border: solid 1px black;">Product ID</th>
+                        <th style="color:black; border: solid 1px black;">Name</th>
+
+                        <th style="color:black; border: solid 1px black;">Price</th>
+
+                        <th style="color:black; border: solid 1px black;">Quantity</th>
+                        <th style="color:black; border: solid 1px black;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        totalPrice += item.producprice * item.quintity;
+                        <tr>
+                            <td style="color:black; border: solid 1px black;">@item.ProductID</td>
+                            <td style="color:black; border: solid 1px black;">@item.productname</td>
+                            <td style="color:black; border: solid 1px black;">@item.producprice</td>
+                            <td style="color:black; border: solid 1px black;">@item.quintity</td>
+                            <td style="color:black; border: solid 1px black;">
+                                <a asp-action="Buyit" asp-controller="AddToCart" asp-route-id="@item.CustomerID "class="btn btn-primary">buy</a>
+                                <a asp-action="Removecart" asp-controller="AddToCart" asp-route-id="@item.Id" class="btn btn-primary">Remove</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="text-center" style="background-color:wheat; padding-top:20px; margin-top:20px; color:navy;">
+                <h3><strong>Total Price: @totalPrice</strong></h3>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-success">Save to favorite </button>
+            </div>
+        </form>
+    }
+    else
+    {
+        <h2>Empty Cart</h2>
+    }
+
+</body>

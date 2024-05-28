@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Order Confirmation";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+    
+        .confirmation-container h1 {
+            color: green;
+            font-weight: bold;
+            font-size: 2em; /* Increase heading font size */
+        }
+        .confirmation-container p {
+            margin: 20px 0;
+            font-size: 1.5em; /* Increase paragraph font size */
+        }
+    </style>
+</head>
+<body style="background-color:wheat; padding-top:20px; margin-top:20px; color:navy;">
+    <div class="confirmation-container">
+        <h1 style="color:limegreen; padding-top:20px;"><b>Order Confirmation</b></h1>
+        <p>Done! Your order will be delivered to you in 14 days.</p>
+        <p>Thank you for your order, @ViewData["CustomerName"]!</p>
+    </div>
+</body>
+</html>
